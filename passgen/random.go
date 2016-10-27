@@ -1,6 +1,7 @@
 package passgen
 
-// GenerateDefaultRandomPasswords generates a number of configurable random passwords
+// GenerateDefaultRandomPasswords is a conveniance function that
+// generates a number of configurable random passwords from the english alphabet
 func GenerateDefaultRandomPasswords(length int, number int, useUpper bool,
 	useLower bool, useNumeric bool, useSpecial bool) []string {
 

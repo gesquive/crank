@@ -4,13 +4,13 @@ GOCC := go
 VERSION := $(shell git describe --always --tags)
 
 # Binary name for bintray
-BIN_NAME=passmakr
+BIN_NAME=passforge
 
 # Project owner for bintray
 OWNER=gesquive
 
 # Project name for bintray
-PROJECT_NAME=passmakr
+PROJECT_NAME=passforge
 
 # Project url used for builds
 # examples: github.com, bitbucket.org
@@ -52,10 +52,13 @@ install: build ## Install the binaries on this computer
 
 .PHONY: depends
 depends: ## Download project dependencies
-	${GOCC} get -u github.com/Masterminds/glide
-	glide install
-	${GOCC} get -u github.com/jteeuwen/go-bindata/...
-	go-bindata -pkg passgen -o passgen/data.go data/
+	# ${GOCC} get -u github.com/Masterminds/glide
+	# glide install
+	${GOCC} get github.com/jteeuwen/go-bindata/...
+	go-bindata -pkg passgen -o passgen/data.go -prefix wordlists/common/ \
+		wordlists/common/american-full \
+		wordlists/common/british-full \
+		wordlists/common/american-common
 
 .PHONY: test
 test: ## Run golang tests

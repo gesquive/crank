@@ -1,6 +1,7 @@
 package passgen
 
 import "bytes"
+import "math"
 import "crypto/rand"
 import "encoding/binary"
 
@@ -56,4 +57,23 @@ func getRandomUInt64Array(length int) []uint64 {
 		ints[i] = store
 	}
 	return ints
+}
+
+// getRandomFloat32Array returns an array of float32 with a value [0..1]
+func getRandomFloat32Array(length int) []float32 {
+	sz := 4
+	rands := make([]byte, length*sz)
+	_, err := rand.Read(rands)
+	if err != nil {
+		return []float32{}
+	}
+
+	floats := make([]float32, length)
+	var store uint32
+	for i := range floats {
+		idx := i * sz
+		binary.Read(bytes.NewBuffer(rands[idx:idx+sz]), binary.LittleEndian, &store)
+		floats[i] = float32(store) / float32(math.MaxUint32)
+	}
+	return floats
 }

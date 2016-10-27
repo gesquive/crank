@@ -2,11 +2,6 @@ package passgen
 
 import "strings"
 
-// GenerateXKCDCommonPasswords generates a number of XKCD passwords using the common dictionary
-func GenerateXKCDCommonPasswords(words int, number int) []string {
-	return GenerateXKCDPasswords(words, number, common)
-}
-
 // GenerateXKCDPasswords generates a number of XKCD passwords with defined number of words
 func GenerateXKCDPasswords(words int, number int, dictionary []string) []string {
 	l := make([]string, number)
