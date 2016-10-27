@@ -35,3 +35,31 @@ func readDictionary(r io.Reader) (wordList []string, err error) {
 	}
 	return wordList, nil
 }
+
+// GenerateTrigraphDictionary generates a trigraph dictionary from a word list
+func GenerateTrigraphDictionary(dictionary []string) (sigma int, tris [26][26][26]int) {
+	for w := 0; w < len(dictionary); w++ {
+		k1, k2 := -1, -1
+		for c := 0; c < len(dictionary[w]); c++ {
+			k3 := getRuneIndex(dictionary[w][c])
+			if k3 >= 0 { // we have a valid character
+				if k1 >= 0 { // do we have 3 letters?
+					tris[k1][k2][k3]++ // count
+					sigma++
+				}
+				k1 = k2 // shift over
+				k2 = k3
+			}
+		}
+	}
+	return sigma, tris
+}
+
+func getRuneIndex(char byte) int {
+	if char >= 'A' && char <= 'Z' {
+		return int(char - 'A')
+	} else if char >= 'a' && char <= 'z' {
+		return int(char - 'a')
+	}
+	return -1
+}
