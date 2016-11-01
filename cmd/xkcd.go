@@ -4,7 +4,7 @@ import "os"
 import "fmt"
 import "github.com/spf13/cobra"
 import "github.com/spf13/viper"
-import "github.com/gesquive/passforge/passgen"
+import "github.com/gesquive/forge/passgen"
 
 // xkcdCmd represents the xkcd command
 var xkcdCmd = &cobra.Command{

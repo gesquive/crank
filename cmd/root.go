@@ -15,7 +15,7 @@ var showVersion bool
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:    "passforge",
+	Use:    "forge",
 	Short:  "Generate random passwords",
 	Long:   `Generate secure random passwords in a number of different formats`,
 	Run:    runRootCmd,
@@ -38,12 +38,12 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	RootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "",
-		"config file (default is $HOME/.config/passforge.yml)")
+		"config file (default is $HOME/.config/forge.yml)")
 	RootCmd.PersistentFlags().BoolVarP(&showVersion, "version", "v", false,
 		"Show the version and exit")
 	RootCmd.PersistentFlags().Int32P("number", "n", 5, "The number of passwords to generate")
 
-	viper.SetEnvPrefix("passforge")
+	viper.SetEnvPrefix("forge")
 	viper.AutomaticEnv()
 
 	viper.BindEnv("number")
@@ -59,7 +59,7 @@ func initConfig() {
 
 	viper.SetConfigName(".config")                    // name of config file (without extension)
 	viper.AddConfigPath(".")                          // addign current director as first search path
-	viper.AddConfigPath("$HOME/.config/passforge.yml") // adding home directory as next search path
+	viper.AddConfigPath("$HOME/.config/forge.yml") // adding home directory as next search path
 	viper.AutomaticEnv()                              // read in environment variables that match
 
 	// If a config file is found, read it in.
@@ -67,10 +67,10 @@ func initConfig() {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
 
-	// passforge random --chars="ABCD" --no-lower --no-upper --no-nums --no-special
-	// passforge xkcd --words=4
-	// passforge leet
-	// passforge trigraph
+	// forge random --chars="ABCD" --no-lower --no-upper --no-nums --no-special
+	// forge xkcd --words=4
+	// forge leet
+	// forge trigraph
 }
 
 func runRootCmd(cmd *cobra.Command, args []string) {

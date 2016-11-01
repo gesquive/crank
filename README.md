@@ -1,4 +1,4 @@
-# passforge
+# forge
 
 A simple password generation cli app.
 
@@ -16,14 +16,14 @@ It can generate passwords in multiple formats:
 ## Installing
 
 ### Compile
-This project requires go1.6+ to compile. Just run `go get -u github.com/gesquive/passforge` and the executable should be built for you automatically in your `$GOPATH`.
+This project requires go1.6+ to compile. Just run `go get -u github.com/gesquive/forge` and the executable should be built for you automatically in your `$GOPATH`.
 
 ## Usage
 ```console
 Generate secure random passwords in a number of different formats
 
 Usage:
-  passforge [flags] [command]
+  forge [flags] [command]
 
 Available Commands:
   random      Generate random passwords
@@ -31,16 +31,16 @@ Available Commands:
   xkcd        Generate passwords with the XKCD password scheme
 
 Flags:
-  -c, --config string   config file (default is $HOME/.config/passforge.yml)
+  -c, --config string   config file (default is $HOME/.config/forge.yml)
   -n, --number value    The number of passwords to generate (default 5)
   -v, --version         Show the version and exit
 
-Use "passforge [command] --help" for more information about a command.
+Use "forge [command] --help" for more information about a command.
 ```
 
 ## Documentation
 
-This documentation can be found at github.com/gesquive/passforge
+This documentation can be found at github.com/gesquive/forge
 
 ## License
 

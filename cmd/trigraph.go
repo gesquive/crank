@@ -2,7 +2,7 @@ package cmd
 
 import "os"
 import "fmt"
-import "github.com/gesquive/passforge/passgen"
+import "github.com/gesquive/forge/passgen"
 import "github.com/spf13/cobra"
 import "github.com/spf13/viper"
 
