@@ -3,7 +3,7 @@ package main
 import "fmt"
 import "github.com/gesquive/forge/cmd"
 
-var version = "v0.1.0"
+var version = "v0.1.1"
 var dirty = ""
 
 func main() {
