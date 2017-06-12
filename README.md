@@ -1,6 +1,9 @@
 # forge
+[![Travis CI](https://img.shields.io/travis/gesquive/forge/master.svg?style=flat-square)](https://travis-ci.org/gesquive/forge)
+[![Software License](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/gesquive/forge/blob/master/LICENSE)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/gesquive/forge)
 
-A simple password generation cli app.
+A simple password generation cli app. This app was originally built as a playground for some ideas.
 
 It can generate passwords in multiple formats:
 
