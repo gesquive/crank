@@ -57,10 +57,10 @@ func initConfig() {
 		viper.SetConfigFile(cfgFile)
 	}
 
-	viper.SetConfigName(".config")                    // name of config file (without extension)
-	viper.AddConfigPath(".")                          // addign current director as first search path
-	viper.AddConfigPath("$HOME/.config/forge.yml") // adding home directory as next search path
-	viper.AutomaticEnv()                              // read in environment variables that match
+	viper.SetConfigName("config")              // name of config file (without extension)
+	viper.AddConfigPath(".")                   // addign current director as first search path
+	viper.AddConfigPath("$HOME/.config/forge") // adding home directory as next search path
+	viper.AutomaticEnv()                       // read in environment variables that match
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
