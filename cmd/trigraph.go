@@ -1,10 +1,13 @@
 package cmd
 
-import "os"
-import "fmt"
-import "github.com/gesquive/forge/passgen"
-import "github.com/spf13/cobra"
-import "github.com/spf13/viper"
+import (
+	"fmt"
+	"os"
+
+	"github.com/gesquive/crank/passgen"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+)
 
 // trigraphCmd represents the trigraph command
 var trigraphCmd = &cobra.Command{

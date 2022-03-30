@@ -1,7 +1,7 @@
-# forge
-[![Travis CI](https://img.shields.io/travis/gesquive/forge/master.svg?style=flat-square)](https://travis-ci.org/gesquive/forge)
-[![Software License](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/gesquive/forge/blob/master/LICENSE)
-[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/gesquive/forge)
+# crank
+[![Travis CI](https://img.shields.io/travis/gesquive/crank/master.svg?style=flat-square)](https://travis-ci.org/gesquive/crank)
+[![Software License](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/gesquive/crank/blob/master/LICENSE)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/gesquive/crank)
 
 A simple password generation cli app. This app was originally built as a playground for some ideas.
 
@@ -19,14 +19,14 @@ It can generate passwords in multiple formats:
 ## Installing
 
 ### Compile
-This project requires go1.6+ to compile. Just run `go get -u github.com/gesquive/forge` and the executable should be built for you automatically in your `$GOPATH`.
+This project requires go1.6+ to compile. Just run `go get -u github.com/gesquive/crank` and the executable should be built for you automatically in your `$GOPATH`.
 
 ## Usage
 ```console
 Generate secure random passwords in a number of different formats
 
 Usage:
-  forge [flags] [command]
+  crank [flags] [command]
 
 Available Commands:
   random      Generate random passwords
@@ -34,16 +34,16 @@ Available Commands:
   xkcd        Generate passwords with the XKCD password scheme
 
 Flags:
-  -c, --config string   config file (default is $HOME/.config/forge.yml)
+  -c, --config string   config file (default is $HOME/.config/crank.yml)
   -n, --number value    The number of passwords to generate (default 5)
   -v, --version         Show the version and exit
 
-Use "forge [command] --help" for more information about a command.
+Use "crank [command] --help" for more information about a command.
 ```
 
 ## Documentation
 
-This documentation can be found at github.com/gesquive/forge
+This documentation can be found at github.com/gesquive/crank
 
 ## License
 

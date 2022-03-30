@@ -1,8 +1,10 @@
 package cmd
 
-import "github.com/spf13/cobra"
-import "github.com/spf13/viper"
-import "github.com/gesquive/forge/passgen"
+import (
+	"github.com/gesquive/crank/passgen"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+)
 
 // randomCmd represents the random command
 var randomCmd = &cobra.Command{
