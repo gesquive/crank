@@ -3,13 +3,20 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
+// current build info
+var (
+	BuildVersion = "v0.1.2-dev"
+	BuildCommit  = ""
+	BuildDate    = ""
+)
+
 var cfgFile string
-var displayVersion string
 
 var showVersion bool
 
@@ -24,10 +31,9 @@ var RootCmd = &cobra.Command{
 
 // Execute adds all child commands to the root command sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute(version string) {
-	displayVersion = version
-	RootCmd.SetHelpTemplate(fmt.Sprintf("%s\nVersion:\n  github.com/gesquive/%s\n",
-		RootCmd.HelpTemplate(), displayVersion))
+func Execute() {
+	RootCmd.SetHelpTemplate(helpTemplate())
+	RootCmd.SetUsageTemplate(usageTemplate())
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(-1)
@@ -75,8 +81,16 @@ func initConfig() {
 
 func runRootCmd(cmd *cobra.Command, args []string) {
 	if showVersion {
-		// cli.Info(displayVersion)
-		fmt.Println(displayVersion)
+		fmt.Printf("github.com/gesquive/crank\n")
+		fmt.Printf(" Version:    %s\n", BuildVersion)
+		if len(BuildCommit) > 6 {
+			fmt.Printf(" Git Commit: %s\n", BuildCommit[:7])
+		}
+		if BuildDate != "" {
+			fmt.Printf(" Build Date: %s\n", BuildDate)
+		}
+		fmt.Printf(" Go Version: %s\n", runtime.Version())
+		fmt.Printf(" OS/Arch:    %s/%s\n", runtime.GOOS, runtime.GOARCH)
 		os.Exit(0)
 	}
 	cmd.Usage()
@@ -86,4 +100,34 @@ func printList(list []string) {
 	for i := range list {
 		fmt.Printf("%s\n", list[i])
 	}
+}
+
+func helpTemplate() string {
+	return fmt.Sprintf("%s\nVersion:\n  github.com/gesquive/crank %s\n",
+		RootCmd.HelpTemplate(), BuildVersion)
+}
+
+func usageTemplate() string {
+	return `Usage:{{if .Runnable}}
+  {{.UseLine}}{{end}}{{if gt (len .Aliases) 0}}
+Aliases:
+  {{.NameAndAliases}}{{end}}{{if .HasExample}}
+  
+Examples:
+  {{.Example}}{{end}}{{if .HasAvailableSubCommands}}
+  
+Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
+  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableLocalFlags}}
+  
+Flags:
+{{.LocalFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasAvailableInheritedFlags}}
+  
+Global Flags:
+{{.InheritedFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasHelpSubCommands}}
+  
+Additional help topics:{{range .Commands}}{{if .IsAdditionalHelpTopicCommand}}
+  {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableSubCommands}}
+  
+Use "{{.CommandPath}} [command] --help" for more information about a command.{{end}}
+`
 }
