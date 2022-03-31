@@ -3,8 +3,10 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/gesquive/crank/passgen"
+	"github.com/gesquive/crank/wordlists"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -28,21 +30,24 @@ func init() {
 	viper.BindPFlag("xkcd.dictionary", xkcdCmd.Flags().Lookup("dictionary"))
 
 	viper.SetDefault("xkcd.words", 4)
+	viper.SetDefault("xkcd.dictionary", "asset:american-common")
 }
 
 func runXKCDCmd(cmd *cobra.Command, args []string) {
 	numWords := viper.GetInt("xkcd.words")
 	numPasses := viper.GetInt("number")
 	dictName := viper.GetString("xkcd.dictionary")
+
 	var dictionary []string
 	var err error
-	if len(dictName) == 0 {
-		dictionary, err = passgen.LoadDictionaryAsset("american-common")
+	if strings.HasPrefix(dictName, "asset:") {
+		dictName = strings.TrimPrefix(dictName, "asset:")
+		dictionary, err = wordlists.LoadDictionaryAsset(dictName)
 	} else {
-		dictionary, err = passgen.LoadDictionaryFile(dictName)
+		dictionary, err = wordlists.LoadDictionaryFile(dictName)
 	}
 	if err != nil {
-		fmt.Printf("ERR: %+v\n", err)
+		fmt.Printf("loading error: %+v\n", err)
 		os.Exit(1)
 	}
 

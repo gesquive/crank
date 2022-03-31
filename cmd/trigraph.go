@@ -3,8 +3,10 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/gesquive/crank/passgen"
+	"github.com/gesquive/crank/wordlists"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -28,6 +30,7 @@ func init() {
 	viper.BindPFlag("trigraph.dictionary", trigraphCmd.Flags().Lookup("dictionary"))
 
 	viper.SetDefault("trigraph.length", 16)
+	viper.SetDefault("trigraph.dictionary", "asset:american-full")
 
 }
 
@@ -35,15 +38,17 @@ func runTrigraphCmd(cmd *cobra.Command, args []string) {
 	length := viper.GetInt("trigraph.length")
 	numPasses := viper.GetInt("number")
 	dictName := viper.GetString("trigraph.dictionary")
+
 	var dictionary []string
 	var err error
-	if len(dictName) == 0 {
-		dictionary, err = passgen.LoadDictionaryAsset("american-full")
+	if strings.HasPrefix(dictName, "asset:") {
+		dictName = strings.TrimPrefix(dictName, "asset:")
+		dictionary, err = wordlists.LoadDictionaryAsset(dictName)
 	} else {
-		dictionary, err = passgen.LoadDictionaryFile(dictName)
+		dictionary, err = wordlists.LoadDictionaryFile(dictName)
 	}
 	if err != nil {
-		fmt.Printf("ERR: %+v\n", err)
+		fmt.Printf("loading error: %+v\n", err)
 		os.Exit(1)
 	}
 
