@@ -1,7 +1,8 @@
 # crank
-[![Travis CI](https://img.shields.io/travis/gesquive/crank/master.svg?style=flat-square)](https://travis-ci.org/gesquive/crank)
 [![Software License](https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square)](https://github.com/gesquive/crank/blob/master/LICENSE)
-[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/gesquive/crank)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://pkg.go.dev/github.com/gesquive/crank)
+[![Build Status](https://img.shields.io/circleci/build/github/gesquive/crank?style=flat-square)](https://circleci.com/gh/gesquive/crank)
+[![Coverage Report](https://img.shields.io/codecov/c/gh/gesquive/crank?style=flat-square)](https://codecov.io/gh/gesquive/crank)
 
 A simple password generation cli app. This app was originally built as a playground for some ideas.
 
@@ -19,7 +20,22 @@ It can generate passwords in multiple formats:
 ## Installing
 
 ### Compile
-This project requires go1.6+ to compile. Just run `go get -u github.com/gesquive/crank` and the executable should be built for you automatically in your `$GOPATH`.
+This project requires go1.17+ to compile. Just run `go install github.com/gesquive/crank@latest` and the executable should be built for you automatically in your `$GOPATH`.
+
+Optionally you can run `make install` to build and copy the executable to `/usr/local/bin/` with correct permissions.
+
+### Download
+Alternately, you can download the latest release for your platform from [github](https://github.com/gesquive/crank/releases/latest).
+
+Once you have an executable, make sure to copy it somewhere on your path like `/usr/local/bin` or `C:/Program Files/`.
+If on a \*nix/mac system, make sure to run `chmod +x /path/to/crank`.
+
+### Homebrew
+This app is also avalable from this [homebrew tap](https://github.com/gesquive/homebrew-tap). Just install the tap and then the app will be available.
+```shell
+$ brew tap gesquive/tap
+$ brew install crank
+```
 
 ## Usage
 ```console
