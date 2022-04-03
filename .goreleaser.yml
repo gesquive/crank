@@ -90,26 +90,18 @@ brews:
 
     # Your app's homepage.
     # Default is empty.
-    homepage: "https://github.com/gesquive/git-user"
+    homepage: "https://github.com/gesquive/crank"
 
     # Your app's description.
     # Default is empty.
-    description: "lets you quickly switch between multiple git user profiles"
+    description: "generate random passwords"
 
     # If set to auto, the release will not be uploaded to the homebrew tap
     # in case there is an indicator for prerelease in the tag e.g. v1.0.0-rc1
     skip_upload: auto
 
     # Packages your package depends on.
-    dependencies:
-      - git
+    dependencies: []
 
     # Packages that conflict with your package.
     conflicts: []
-
-    # Custom install script for brew.
-    # Default is 'bin.install "program"'.
-    install: |
-      bin.install "git-user"
-      man.mkpath
-      man1.install "docs/manpages/git-user.1", "docs/manpages/git-user-add.1", "docs/manpages/git-user-del.1", "docs/manpages/git-user-edit.1", "docs/manpages/git-user-list.1", "docs/manpages/git-user-rm.1", "docs/manpages/git-user-set.1"
