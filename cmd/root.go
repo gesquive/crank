@@ -49,6 +49,8 @@ func init() {
 		"Show the version and exit")
 	RootCmd.PersistentFlags().Int32P("number", "n", 5, "The number of passwords to generate")
 
+	RootCmd.CompletionOptions.HiddenDefaultCmd = true
+
 	viper.SetEnvPrefix("crank")
 	viper.AutomaticEnv()
 

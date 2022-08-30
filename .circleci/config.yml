@@ -44,6 +44,10 @@ jobs:
       - image: gesquive/go-builder:latest
     steps:
       - run: cci-clone
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
+      - run: goreleaser --version
       - run: make release-snapshot
       - save_cache:
           key: go-snap-v1-{{ .Environment.CIRCLE_SHA1 }}
@@ -55,6 +59,9 @@ jobs:
       - image: gesquive/go-builder:latest
     steps:
       - run: cci-clone
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
       - run: goreleaser --version
       - run: make release
       - save_cache:
