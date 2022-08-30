@@ -23,11 +23,13 @@ var xkcdCmd = &cobra.Command{
 func init() {
 	RootCmd.AddCommand(xkcdCmd)
 
-	xkcdCmd.Flags().IntP("words", "w", 4, "The number of words in the password")
+	xkcdCmd.Flags().IntP("words", "w", 4, "The number of words in the password.")
 	xkcdCmd.Flags().StringP("dictionary", "d", "", "Word dictionary to generate passwords from.")
+	xkcdCmd.Flags().StringP("separator", "s", " ", "Separator to use between words.")
 
 	viper.BindPFlag("xkcd.words", xkcdCmd.Flags().Lookup("words"))
 	viper.BindPFlag("xkcd.dictionary", xkcdCmd.Flags().Lookup("dictionary"))
+	viper.BindPFlag("xkcd.separator", xkcdCmd.Flags().Lookup("separator"))
 
 	viper.SetDefault("xkcd.words", 4)
 	viper.SetDefault("xkcd.dictionary", "asset:american-common")
@@ -37,6 +39,7 @@ func runXKCDCmd(cmd *cobra.Command, args []string) {
 	numWords := viper.GetInt("xkcd.words")
 	numPasses := viper.GetInt("number")
 	dictName := viper.GetString("xkcd.dictionary")
+	separator := viper.GetString("xkcd.separator")
 
 	var dictionary []string
 	var err error
@@ -51,6 +54,6 @@ func runXKCDCmd(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	passwords := passgen.GenerateXKCDPasswords(numWords, numPasses, dictionary)
+	passwords := passgen.GenerateXKCDPasswords(numWords, numPasses, separator, dictionary)
 	printList(passwords)
 }
