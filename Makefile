@@ -102,6 +102,7 @@ clean: ## Clean the directory tree
 	rm -f ./${BIN_NAME}
 	rm -rf "${DIST_PATH}"
 	rm -f "${COVER_PATH}"
+	rm -rf ./completions
 
 .PHONY: release-snapshot
 release-snapshot: ${GORELEASER} ## Cross compile and package to local disk
@@ -154,3 +155,10 @@ release-docker-snapshot: init-docker-build
 release-docker: init-docker-build ## Build a multi-arch docker manifest and images
 	@echo "building multi-arch docker ${DK_VERSION}"
 	${DOCKER} buildx build -f ${DK_PATH} --platform ${DK_PLATFORMS} --pull -t ${DK_NAME}:${DK_VERSION} -t ${DK_NAME}:latest --push .
+
+.PHONY: completion-scripts
+completion-scripts: ## Compile the completion scripts
+	mkdir -p completions
+	${GOCC} run main.go completion bash > completions/${BIN_NAME}.bash
+	${GOCC} run main.go completion fish > completions/${BIN_NAME}.fish
+	${GOCC} run main.go completion zsh > completions/${BIN_NAME}.zsh

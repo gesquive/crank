@@ -57,6 +57,50 @@ Flags:
 Use "crank [command] --help" for more information about a command.
 ```
 
+## Shell Completion
+If you install via homebrew, the shell completion scripts are installed for you. Otherwise, this application can generate its own shell completion scripts for bash/fish/zsh.
+
+### Bash
+To generate and load completion scripts for bash
+```bash
+source <(crank completion bash)
+```
+
+To load completions for each session, execute once:
+
+Linux:
+```bash
+crank completion bash > /etc/bash_completion.d/crank
+```
+macOS:
+```bash
+crank completion bash > $(brew --prefix)/etc/bash_completion.d/crank
+```
+
+### zsh
+If shell completion is not already enabled in your environment, you will need to enable it. You can execute the following once:
+
+```zsh
+echo "autoload -U compinit; compinit" >> ~/.zshrc
+```
+
+To load completions for each session, execute once:
+```zsh
+crank completion zsh > "${fpath[1]}/_crank"
+```
+
+You will need to start a new shell for this setup to take effect.
+
+### fish
+```shell
+crank completion fish | source
+```
+
+To load completions for each session, execute once:
+```shell
+crank completion fish > ~/.config/fish/completions/crank.fish
+```
+
 ## Documentation
 
 This documentation can be found at github.com/gesquive/crank

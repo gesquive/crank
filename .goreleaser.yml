@@ -40,7 +40,7 @@ archives:
       - LICENSE*
       - README*
       - CHANGELOG*
-      - docs/manpages/*
+      - completions/*
 
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
@@ -105,3 +105,11 @@ brews:
 
     # Packages that conflict with your package.
     conflicts: []
+
+    # Custom install script for brew.
+    # Default is 'bin.install "program"'.
+    install: |
+      bin.install "crank"
+      bash_completion.install "completions/crank.bash" => "crank"
+      fish_completion.install "completions/crank.fish"
+      zsh_completion.install "completions/crank.zsh" => "_crank"

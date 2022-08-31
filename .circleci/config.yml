@@ -48,6 +48,7 @@ jobs:
           keys:
             - go-mod-v1-{{ checksum "go.sum" }}
       - run: goreleaser --version
+      - run: make completion-scripts
       - run: make release-snapshot
       - save_cache:
           key: go-snap-v1-{{ .Environment.CIRCLE_SHA1 }}
@@ -63,6 +64,7 @@ jobs:
           keys:
             - go-mod-v1-{{ checksum "go.sum" }}
       - run: goreleaser --version
+      - run: make completion-scripts
       - run: make release
       - save_cache:
           key: go-dist-v1-{{ .Environment.CIRCLE_SHA1 }}
